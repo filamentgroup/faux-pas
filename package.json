@@ -1,5 +1,5 @@
 {
-  "name": "faux-pas",
+  "name": "fg-faux-pas",
   "version": "1.0.0",
   "description": "A faux web font detector",
   "main": "faux-pas.js",
