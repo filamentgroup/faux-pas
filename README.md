@@ -18,9 +18,13 @@ Further, if your element wants a `font-weight` less than or equal to `500` but y
 
 ![Standard Open Sans](/docs/normal.png)
 
-### Faux Italic rendering of Open Sans
+### Faux Bold Open Sans
 
-![Faux Italics on Open Sans](/docs/faux.png)
+![Faux Bold Open Sans](/docs/faux-bold.png)
+
+### Faux Italic Open Sans
+
+![Faux Italic Open Sans](/docs/faux-italic.png)
 
 ## Installation
 
