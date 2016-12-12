@@ -20,7 +20,7 @@ Further, if your element wants a `font-weight` less than or equal to `500` but y
 
 ### Faux Bold Open Sans
 
-![Faux Bold Open Sans](/docs/faux-bold.png)
+![Faux Bold Open Sans](/docs/faux-bold2.png)
 
 ### Faux Italic Open Sans
 
