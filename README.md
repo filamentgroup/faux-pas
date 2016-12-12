@@ -1,5 +1,7 @@
 # faux pas, a faux web font detector
 
+A script to highlight elements that are mismatched incorrectly to @font-face blocks, which may result in shoddy faux bold or faux italic rendering.
+
 ## [Demo](https://filamentgroup.github.io/faux-pas/dist/demo.html)
 
 A more [comprehensive test page](https://filamentgroup.github.io/faux-pas/test/index.html) is also available.
@@ -17,7 +19,7 @@ Further, if your element wants a `font-weight` less than or equal to `500` but y
 Available on npm as `fg-faux-pas`:
 
 ```
-npm install fg-faux-pas
+npm install --save-dev fg-faux-pas
 ```
 
 ## Usage
