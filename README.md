@@ -12,6 +12,14 @@ Further, if your element wants a `font-weight` less than or equal to `500` but y
 
 `faux-pas` helps you by logging and reporting these mismatches and faux renderings so that you can fix the offending code.
 
+## Installation
+
+Available on npm as `fg-faux-pas`:
+
+```
+npm install fg-faux-pas
+```
+
 ## Usage
 
 * Bookmarklet: Get the bookmarklet at the [demo page](https://filamentgroup.github.io/faux-pas/dist/demo.html). Drag it to your bookmarklets and use where needed. By default it highlights elements on your page but check the console for more output.
