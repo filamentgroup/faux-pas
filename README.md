@@ -14,6 +14,14 @@ Further, if your element wants a `font-weight` less than or equal to `500` but y
 
 `faux-pas` helps you by logging and reporting these mismatches and faux renderings so that you can fix the offending code.
 
+### Standard rendering of Open Sans
+
+![Standard Open Sans](/docs/normal.png)
+
+### Faux Italic rendering of Open Sans
+
+![Faux Italics on Open Sans](/docs/faux.png)
+
 ## Installation
 
 Available on npm as `fg-faux-pas`:
