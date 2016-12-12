@@ -1,8 +1,8 @@
 # faux pas, a faux web font detector
 
-## [Demo](dist/demo.html)
+## [Demo](https://filamentgroup.github.io/faux-pas/dist/demo.html)
 
-A more [comprehensive test page](test/) is also available.
+A more [comprehensive test page](https://filamentgroup.github.io/faux-pas/test/index.html) is also available.
 
 ## What is this?
 
@@ -14,7 +14,7 @@ Further, if your element wants a `font-weight` less than or equal to `500` but y
 
 ## Usage
 
-* Bookmarklet: Get the bookmarklet at the [demo page](dist/demo.html). Drag it to your bookmarklets and use where needed. By default it highlights elements on your page but check the console for more output.
+* Bookmarklet: Get the bookmarklet at the [demo page](https://filamentgroup.github.io/faux-pas/dist/demo.html). Drag it to your bookmarklets and use where needed. By default it highlights elements on your page but check the console for more output.
 * Recommended: Include in your pattern library build. Include both `faux-pas.js` and `faux-pas.init.js` (tip: use your own init file to change configuration options).
 
 ## Options
