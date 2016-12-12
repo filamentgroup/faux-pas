@@ -1,0 +1,240 @@
+@font-face {
+	font-family: OpenSansRegular-Italic-Bold-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansRegular-Italic-Bold-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Italic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansRegular-Italic-Bold-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansRegular-Italic-Bold-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-BoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansRegular;
+	src: url('fonts/OpenSans/OpenSans-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansBold;
+	src: url('fonts/OpenSans/OpenSans-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansItalic;
+	src: url('fonts/OpenSans/OpenSans-Italic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansBoldItalic;
+	src: url('fonts/OpenSans/OpenSans-BoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansRegular-Bold;
+	src: url('fonts/OpenSans/OpenSans-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansRegular-Bold;
+	src: url('fonts/OpenSans/OpenSans-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansRegular-Italic-Bold;
+	src: url('fonts/OpenSans/OpenSans-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansRegular-Italic-Bold;
+	src: url('fonts/OpenSans/OpenSans-Italic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansRegular-Italic-Bold;
+	src: url('fonts/OpenSans/OpenSans-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: OpenSansRegular-Italic-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansRegular-Italic-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Italic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansRegular-Italic-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-BoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansRegular-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansRegular-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-BoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansRegular-Italic;
+	src: url('fonts/OpenSans/OpenSans-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansRegular-Italic;
+	src: url('fonts/OpenSans/OpenSans-Italic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansItalic-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Italic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansItalic-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-BoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansBold-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansBold-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-BoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansBold-Italic;
+	src: url('fonts/OpenSans/OpenSans-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansBold-Italic;
+	src: url('fonts/OpenSans/OpenSans-Italic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansBold-Italic-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansBold-Italic-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Italic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: OpenSansBold-Italic-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-BoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: OpenSansRegular-Bold-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansRegular-Bold-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: OpenSansRegular-Bold-BoldItalic;
+	src: url('fonts/OpenSans/OpenSans-BoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+}
+
+.opensans-0001 {
+	font-family: OpenSansBoldItalic;
+}
+.opensans-0010 {
+	font-family: OpenSansItalic;
+}
+.opensans-0011 {
+	font-family: OpenSansItalic-BoldItalic;
+}
+.opensans-0100 {
+	font-family: OpenSansBold;
+}
+.opensans-0101 {
+	font-family: OpenSansBold-BoldItalic;
+}
+.opensans-0110 {
+	font-family: OpenSansBold-Italic;
+}
+.opensans-0111 {
+	font-family: OpenSansBold-Italic-BoldItalic;
+}
+.opensans-1000 {
+	font-family: OpenSansRegular;
+}
+.opensans-1001 {
+	font-family: OpenSansRegular-BoldItalic;
+}
+.opensans-1010 {
+	font-family: OpenSansRegular-Italic;
+}
+.opensans-1011 {
+	font-family: OpenSansRegular-Italic-BoldItalic;
+}
+.opensans-1100 {
+	font-family: OpenSansRegular-Bold;
+}
+.opensans-1101 {
+	font-family: OpenSansRegular-Bold-BoldItalic;
+}
+.opensans-1110 {
+	font-family: OpenSansRegular-Italic-Bold;
+}
+.opensans-1111 {
+	font-family: OpenSansRegular-Italic-Bold-BoldItalic;
+}

@@ -1,0 +1,27 @@
+{
+  "name": "faux-pas",
+  "version": "1.0.0",
+  "description": "A faux web font detector",
+  "main": "faux-pas.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filamentgroup/faux-pas.git"
+  },
+  "author": "zachleat <zachleatherman@gmail.com> (http://zachleat.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/filamentgroup/faux-pas/issues"
+  },
+  "homepage": "https://github.com/filamentgroup/faux-pas#readme",
+  "devDependencies": {
+    "bookmarkletify": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-template": "^4.0.0"
+  }
+}

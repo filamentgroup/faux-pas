@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>faux-pas Test Page</title>
+	<link rel="stylesheet" href="fonts.css">
+	<style>
+	/* Demo page styles */
+	body {
+		font-family: sans-serif;
+		font-weight: 400;
+		font-style: normal;
+		font-size: 150%;
+	}
+	h2 {
+		padding-top: 1em;
+		margin-bottom: .5em;
+		clear: both;
+	}
+	p {
+		clear: left;
+		padding: .25em;
+		margin: 0;
+	}
+	.single {
+		margin-bottom: 2em;
+	}
+	.pair {
+		margin: 0 0 1em;
+		width: 45%;
+		margin-right: 5%;
+		float: left;
+	}
+	.wants,
+	.available {
+		font-size: .75em;
+		margin-top: 0;
+		margin-bottom: 2em;
+		float: left;
+	}
+	.faux-expected {
+		outline: 3px solid green;
+	}
+	.mismatch-expected {
+		outline: 3px solid blue;
+	}
+	</style>
+</head>
+<body>
+	<h1>faux-pas Test Page</h1>
+
+	<p>Faux bold and faux italic expected behavior has a <span class="faux-expected">green outline</span> demo-only style. If you see a <span class="faux-expected">green outline</span> without a red background color, this is an error! If an element has picked a matching @font-face block, but the match isn’t exact (wanted Italic, but only Bold Italic was available—not technically font synthesis/faux), this will show a pink background color. If you see a <span class="mismatch-expected">blue outline</span> without a pink background color, this is an error!</p>
+
+	<h2>0000 sans-serif (no web fonts)</h2>
+	<p>This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong></p>
+
+	<h2>0001 Open Sans: No Faux</h2>
+	<ul class="available">
+		<li><del>Roman</del></li>
+		<li><del>Bold (700)</del></li>
+		<li><del>Italic</del></li>
+		<li>Bold (700) &amp; Italic</li>
+	</ul>
+	<p class="single opensans-0001 mismatch-expected">This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-0001 mismatch-expected">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0001"><strong class="mismatch-expected">This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0001"><em class="mismatch-expected">This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0001"><strong><em>This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>0010 Open Sans: Faux Bold, Bold Italic</h2>
+	<ul class="available">
+		<li><del>Roman</del></li>
+		<li><del>Bold (700)</del></li>
+		<li>Italic</li>
+		<li><del>Bold (700) &amp; Italic</del></li>
+	</ul>
+	<p class="single opensans-0010 mismatch-expected">This is roman text. <strong class="faux-expected">This is bold text.</strong> <em>This is italic text.</em> <strong class="faux-expected"><em>This is bold and italic text.</em></strong> This is roman text. <strong class="faux-expected">This is bold text.</strong> <em>This is italic text.</em> <strong><em class="faux-expected">This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-0010 mismatch-expected">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0010"><strong class="faux-expected">This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0010"><em>This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0010"><strong><em class="faux-expected">This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>0011 Open Sans: No Faux</h2>
+	<ul class="available">
+		<li><del>Roman</del></li>
+		<li><del>Bold (700)</del></li>
+		<li>Italic</li>
+		<li>Bold (700) &amp; Italic</li>
+	</ul>
+	<p class="single opensans-0011 mismatch-expected">This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-0011 mismatch-expected">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0011"><strong class="mismatch-expected">This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0011"><em>This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0011"><strong><em>This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>0110 Open Sans, Faux Bold Italic</h2>
+	<ul class="available">
+		<li><del>Roman</del></li>
+		<li>Bold (700)</li>
+		<li>Italic</li>
+		<li><del>Bold (700) &amp; Italic</del></li>
+	</ul>
+	<p class="single opensans-0110 mismatch-expected">This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em class="faux-expected">This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em class="faux-expected">This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-0110 mismatch-expected">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0110"><strong>This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0110"><em>This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0110"><strong><em class="faux-expected">This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>0111 Open Sans: No Faux</h2>
+	<ul class="available">
+		<li><del>Roman</del></li>
+		<li>Bold (700)</li>
+		<li>Italic</li>
+		<li>Bold (700) &amp; Italic</li>
+	</ul>
+	<p class="single opensans-0111 mismatch-expected">This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-0111 mismatch-expected">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0111"><strong>This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0111"><em>This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-0111"><strong><em>This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>1000 Open Sans: Faux Everything</h2>
+	<ul class="available">
+		<li>Roman</li>
+		<li><del>Bold (700)</del></li>
+		<li><del>Italic</del></li>
+		<li><del>Bold (700) &amp; Italic</del></li>
+	</ul>
+	<p class="single opensans-1000">This is roman text. <strong class="faux-expected">This is bold text.</strong> <em class="faux-expected">This is italic text.</em> <strong class="faux-expected"><em>This is bold and italic text.</em></strong> This is roman text. <strong class="faux-expected">This is bold text.</strong> <em class="faux-expected">This is italic text.</em> <strong class="faux-expected"><em>This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-1000">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1000"><strong class="faux-expected">This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1000"><em class="faux-expected">This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1000"><strong><em class="faux-expected">This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>1001 Open Sans: Faux Bold, Mismatch Italic</h2>
+	<ul class="available">
+		<li>Roman</li>
+		<li><del>Bold (700)</del></li>
+		<li><del>Italic</del></li>
+		<li>Bold (700) &amp; Italic</li>
+	</ul>
+	<p class="single opensans-1001">This is roman text. <strong class="faux-expected">This is bold text.</strong> <em class="mismatch-expected">This is italic text.</em> <strong><em>This is bold and italic text.</em></strong> This is roman text. <strong class="faux-expected">This is bold text.</strong> <em class="mismatch-expected">This is italic text.</em> <strong><em>This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-1001">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1001"><strong class="faux-expected">This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1001"><em class="mismatch-expected">This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1001"><strong><em>This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>1010 Open Sans: Faux Bold, Bold Italic</h2>
+	<ul class="available">
+		<li>Roman</li>
+		<li><del>Bold (700)</del></li>
+		<li>Italic</li>
+		<li><del>Bold (700) &amp; Italic</del></li>
+	</ul>
+	<p class="single opensans-1010">This is roman text. <strong class="faux-expected">This is bold text.</strong> <em>This is italic text.</em> <strong class="faux-expected"><em>This is bold and italic text.</em></strong> This is roman text. <strong class="faux-expected">This is bold text.</strong> <em>This is italic text.</em> <strong class="faux-expected"><em>This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-1010">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1010"><strong class="faux-expected">This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1010"><em>This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1010"><strong><em class="faux-expected">This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>1011 Open Sans: Faux Bold</h2>
+	<ul class="available">
+		<li>Roman</li>
+		<li><del>Bold (700)</del></li>
+		<li>Italic</li>
+		<li>Bold (700) &amp; Italic</li>
+	</ul>
+	<p class="single opensans-1011">This is roman text. <strong class="faux-expected">This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong> This is roman text. <strong class="faux-expected">This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-1011">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1011"><strong class="faux-expected">This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1011"><em>This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1011"><strong><em>This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>1100 Open Sans: Faux Italic, Bold Italic</h2>
+	<ul class="available">
+		<li>Roman</li>
+		<li>Bold (700)</li>
+		<li><del>Italic</del></li>
+		<li><del>Bold (700) &amp; Italic</del></li>
+	</ul>
+	<p class="single opensans-1100">This is roman text. <strong>This is bold text.</strong> <em class="faux-expected">This is italic text.</em> <strong><em class="faux-expected">This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em class="faux-expected">This is italic text.</em> <strong><em class="faux-expected">This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-1100">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1100"><strong>This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1100"><em class="faux-expected">This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1100"><strong><em class="faux-expected">This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>1101 Open Sans: No Faux</h2>
+	<ul class="available">
+		<li>Roman</li>
+		<li>Bold (700)</li>
+		<li><del>Italic</del></li>
+		<li>Bold (700) &amp; Italic</li>
+	</ul>
+	<p class="single opensans-1101">This is roman text. <strong>This is bold text.</strong> <em class="mismatch-expected">This is italic text.</em> <strong><em>This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em class="mismatch-expected">This is italic text.</em> <strong><em>This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-1101">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1101"><strong>This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1101"><em class="mismatch-expected">This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1101"><strong><em>This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>1110 Open Sans: Faux Bold-Italic</h2>
+	<ul class="available">
+		<li>Roman</li>
+		<li>Bold (700)</li>
+		<li>Italic</li>
+		<li><del>Bold (700) &amp; Italic</del></li>
+	</ul>
+	<p class="single opensans-1110">This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong class="faux-expected"><em class="faux-expected">This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong class="faux-expected"><em class="faux-expected">This is bold and italic text.</em></strong></p>
+	<div class="pair">
+		<p class="opensans-1110">This is roman text.</p>
+		<p class="opensans-1111">This is roman text (control).</p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1110"><strong>This is bold text.</strong></p>
+		<p class="opensans-1111"><strong>This is bold text (control).</strong></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1110"><em>This is italic text.</em></p>
+		<p class="opensans-1111"><em>This is italic text (control).</em></p>
+	</div>
+	<div class="pair">
+		<p class="opensans-1110"><strong><em class="faux-expected">This is bold and italic text.</em></strong></p>
+		<p class="opensans-1111"><strong><em>This is bold and italic text (control).</em></strong></p>
+	</div>
+
+	<h2>1111 Open Sans: Perfect Match</h2>
+	<ul class="available">
+		<li>Roman</li>
+		<li>Bold (700)</li>
+		<li>Italic</li>
+		<li>Bold (700) &amp; Italic</li>
+	</ul>
+	<p class="single opensans-1111">This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong></p>
+
+	<h2>1111 Open Sans: Mismatched Request, No Faux</h2>
+	<ul class="wants">
+		<li>font-style: normal</li>
+		<li>font-weight: 300, default is 400</li>
+	</ul>
+	<ul class="available">
+		<li>Roman</li>
+		<li>Bold (700)</li>
+		<li>Italic</li>
+		<li>Bold (700) &amp; Italic</li>
+	</ul>
+	<p class="single opensans-1111 mismatch-expected" style="font-weight: 300">This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong></p>
+
+	<h2>1111 Open Sans: Mismatched Request, No Faux</h2>
+	<ul class="wants">
+		<li>font-style: normal</li>
+		<li>font-weight: 600, default is 400</li>
+	</ul>
+	<ul class="available">
+		<li>Roman</li>
+		<li>Bold (700)</li>
+		<li>Italic</li>
+		<li>Bold (700) &amp; Italic</li>
+	</ul>
+	<p class="single opensans-1111 mismatch-expected" style="font-weight: 600">This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong> This is roman text. <strong>This is bold text.</strong> <em>This is italic text.</em> <strong><em>This is bold and italic text.</em></strong></p>
+
+	<script src="../faux-pas.js"></script>
+	<script>
+	// Initialization
+	(function() {
+		var FP = new FauxPas( window, {
+			console: true,
+			outlines: true,
+			mismatches: true
+		});
+
+		FP.compare();
+	})();
+	</script>
+</body>
+</html>
