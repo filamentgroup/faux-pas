@@ -1,6 +1,6 @@
 # faux pas, a faux web font detector
 
-A script to highlight elements that are mismatched incorrectly to @font-face blocks, which may result in shoddy faux bold or faux italic rendering.
+A script to highlight elements that are mismatched incorrectly to @font-face blocks, which may result in shoddy faux bold or faux italic rendering. Works standalone—no dependencies.
 
 ## [Demo](https://filamentgroup.github.io/faux-pas/dist/demo.html)
 
@@ -44,6 +44,19 @@ npm install --save-dev fg-faux-pas
 * `console: true`: uses `console` to output full logging information (warnings for mismatched elements and errors for faux rendering).
 * `highlights: true`: adds a specific style to mismatched/faux elements on the page for visual inspection.
 * `mismatches: true`: a mismatch may not be a faux rendering even though it’s a misconfiguration—this option allows you to disable these warnings.
+
+## Browser Support
+
+Anything that supports the [CSS Font Loading API](http://caniuse.com/#feat=font-loading):
+
+* Google Chrome 35+
+* Opera 22+
+* Firefox 41+
+* Safari 10+
+* Mobile Safari 10+
+* Android Chromium WebView
+* Chrome for Android
+* _and others_
 
 ## Build
 
