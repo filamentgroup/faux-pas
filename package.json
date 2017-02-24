@@ -1,6 +1,6 @@
 {
   "name": "fg-faux-pas",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A script to highlight elements that are mismatched to @font-face blocks which may result in shoddy faux bold or faux italic rendering.",
   "main": "faux-pas.js",
   "directories": {
