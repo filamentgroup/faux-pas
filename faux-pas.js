@@ -30,11 +30,19 @@
 
 	ReportLine.prototype.printElement = function() {
 		// return "<" + this.element.tagName + " class=\"" + this.element.className + "\">";
-		return this.element.outerHTML.replace( / style\=\"[^\"]*\"/, "" );
+		return this.element ? this.element.outerHTML.replace( / style\=\"[^\"]*\"/, "" ) : "";
 	};
 
 	ReportLine.prototype.toString = function() {
-		return projectName + " " + this.level + ": " + this.message + " " + this.printElement();
+		var el = this.printElement();
+		return projectName + " " + this.level + ": " + this.message + ( el ? " " + el : "" );
+	};
+	ReportLine.prototype.console = function() {
+		if( this.element ) {
+			console[ this.level ]( this.message, this.element );
+		} else {
+			console[ this.level ]( this.message );
+		}
 	};
 
 	var Report = function() {
@@ -62,7 +70,7 @@
 		console.group( this.title );
 
 		this.getLines().forEach( function( line ) {
-			console[ line.level ]( line.message, line.element );
+			line.console();
 		});
 
 		console.groupEnd();
@@ -277,34 +285,44 @@
 		Array.prototype.slice.call( this.doc.getElementsByTagName( "*" ) ).forEach(function( el ) {
 			var styles = this._getStyles( el, [ "font-family", "font-weight", "font-style" ] );
 			var families = styles[ "font-family" ].split( "," );
-			var found = false;
 
 			families.forEach(function( family ) {
 				family = family.trim();
 
 				var font = new Font( family, styles[ "font-weight" ], styles[ "font-style" ], this.report );
 
-				// Only web fonts will faux.
-				// TODO leaky assumption, we only use the first web font found as declared in the stack (see generatedDeclaredList note about error status)
-				if( !this.isWebFont( font ) || found ) {
+				// Leaky assumption, we use all webfonts declared in the stack
+				// (see generatedDeclaredList note about error status)
+				// Especially when some type foundaries use two separate web fonts as “DRM”
+				// TODO Reality: only web fonts with valid unicodes in the content will be used.
+				if( !this.isWebFont( font ) ) {
+					// Only web fonts will faux.
 					return;
 				}
-
-				found = true;
 
 				this.usedFontSet.add( font );
 				this.addUsedFontElement( font, el );
 			}.bind( this ) );
 		}.bind( this ) );
+
+		if( !this.usedFontSet.length() ) {
+			this.report.warn( "You didn’t actually use any web fonts here!" );
+		}
 	};
 
 	FauxPas.prototype.generateDeclaredList = function() {
 		this.doc.fonts.forEach(function( font ) {
 			// We want to ignore errored font-face blocks, especially if multiple web fonts are listed in the same used font-family stack on an element.
-			if( font.status !== "error" ) {
+			if( font.status === "error" ) {
+				this.report.error( "One of your web fonts didn’t load due to an error: " + font.family );
+			} else {
 				this.declaredFontSet.add( new Font( font.family, font.weight, font.style ) );
 			}
 		}.bind( this ) );
+
+		if( !this.declaredFontSet.length() ) {
+			this.report.warn( "No web fonts were found!" );
+		}
 	};
 
 	FauxPas.prototype.isWebFont = function( font ) {
