@@ -1,20 +1,98 @@
-;(function() {
+(function( root, factory ) {
+		if( typeof exports === "object" && typeof exports.nodeName !== "string" ) {
+			// CommonJS
+			module.exports = factory();
+		} else {
+			// Browser
+			root.FauxPas = factory();
+		}
+}( this, function() {
 
 	// https://www.w3.org/TR/css-fonts-3/#font-matching-algorithm
 	// TODO font-stretch
 	// TODO font-style: oblique
 	var projectName = "faux-pas";
 
+	var ReportLine = function( level, message, element ) {
+		this.level = level;
+		this.message = message;
+		this.element = element;
+		this.output = this.toString();
+	};
+
+	ReportLine.prototype.isError = function() {
+		return this.level === 'error';
+	};
+
+	ReportLine.prototype.isWarning = function() {
+		return this.level === 'warn';
+	};
+
+	ReportLine.prototype.printElement = function() {
+		// return "<" + this.element.tagName + " class=\"" + this.element.className + "\">";
+		return this.element.outerHTML.replace( / style\=\"[^\"]*\"/, "" );
+	};
+
+	ReportLine.prototype.toString = function() {
+		return projectName + " " + this.level + ": " + this.message + " " + this.printElement();
+	};
+
+	var Report = function() {
+		this.title = projectName + " Results";
+		this.lines = [];
+		this.errorCount = 0;
+		this.warningCount = 0;
+	};
+
+	Report.prototype.warn = function( message, element ) {
+		this.lines.push( new ReportLine( "warn", message, element ) );
+		this.warningCount++;
+	};
+
+	Report.prototype.error = function( message, element ) {
+		this.lines.push( new ReportLine( "error", message, element ) );
+		this.errorCount++;
+	};
+
+	Report.prototype.getLines = function() {
+		return this.lines;
+	};
+
+	Report.prototype.printConsole = function() {
+		console.group( this.title );
+
+		this.getLines().forEach( function( line ) {
+			console[ line.level ]( line.message, line.element );
+		});
+
+		console.groupEnd();
+	};
+
+	Report.prototype.print = function() {
+		return this.lines.map( function( line ) {
+			return line.toString();
+		});
+	};
+
+	Report.prototype.getErrorCount = function() {
+		return this.errorCount;
+	};
+
+	Report.prototype.getWarningCount = function() {
+		return this.warningCount;
+	};
+
 	/*
 	 * Font
 	 */
-	var Font = function( family, weight, style ) {
-		this.family = this.normalizeFamily( family );
+	var Font = function( family, weight, style, report ) {
+		this.family = Font.normalizeFamily( family );
 		this.weight = this.normalizeWeight( weight ) || "400";
 		this.style = style || "normal";
+		this.report = report;
 	};
 
-	Font.prototype.normalizeFamily = function( family ) {
+	Font.normalizeFamily = function( family ) {
 		return family.replace( /[\'\"]/g, '' ).toLowerCase();
 	};
 
@@ -26,7 +104,7 @@
 
 		// lighter and bolder not supported
 		if( weight === "lighter" || weight === "bolder" ) {
-			console.warn( projectName + ": lighter and bolder weights are not supported." );
+			this.report.warn( "lighter and bolder weights are not supported." );
 		}
 
 		return "" + ( weightLookup[ weight ] || weight );
@@ -46,6 +124,10 @@
 		this.fonts = [];
 	};
 
+	FontSet.prototype.length = function() {
+		return this.fonts.length;
+	};
+
 	FontSet.prototype.add = function( font ) {
 		if( !this.allowDuplicates && this.has( font ) ) {
 			return;
@@ -61,6 +143,7 @@
 	};
 
 	FontSet.prototype.hasFamily = function( family ) {
+		family = Font.normalizeFamily( family );
 		return family in this.familyDuplicatesHash;
 	};
 
@@ -137,11 +220,14 @@
 		if( !( "fonts" in win.document ) ) {
 			throw Error( projectName + " requires the CSS Font Loading API, which your browser does not support." );
 		}
+
 		options = options || {};
 
 		this.showMismatches = options.mismatches !== undefined ? options.mismatches : true;
 		this.highlightElements = options.highlights !== undefined ? options.highlights : true;
 		this.consoleOutput = options.console !== undefined ? options.console : true;
+
+		this.report = new Report();
 
 		this.win = win;
 		this.doc = win.document;
@@ -152,10 +238,25 @@
 	};
 
 	FauxPas.prototype.addUsedFontElement = function( font, element ) {
+		var hasTextChildren = false;
+		Array.prototype.slice.call( element.childNodes ).forEach(function( el ) {
+			if( el.nodeType === 3 ) {
+				hasTextChildren = true;
+			}
+		});
+
 		if( !( font in this.usedFontsElements ) ) {
 			this.usedFontsElements[ font ] = [];
 		}
-		this.usedFontsElements[ font ].push( element );
+
+		if( hasTextChildren ) {
+			this.usedFontsElements[ font ].push( element );
+		}
+	};
+
+	FauxPas.prototype._getStyle = function( element, property ) {
+		var css = this.win.getComputedStyle( element, null );
+		return css.getPropertyValue( property );
 	};
 
 	FauxPas.prototype._getStyles = function( element, properties ) {
@@ -167,18 +268,42 @@
 		return styles;
 	};
 
+	FauxPas.prototype.generate = function() {
+		this.generateDeclaredList();
+		this.generateUsedList();
+	};
+
 	FauxPas.prototype.generateUsedList = function() {
 		Array.prototype.slice.call( this.doc.getElementsByTagName( "*" ) ).forEach(function( el ) {
 			var styles = this._getStyles( el, [ "font-family", "font-weight", "font-style" ] );
-			var font = new Font( styles[ "font-family" ], styles[ "font-weight" ], styles[ "font-style" ] );
-			this.usedFontSet.add( font );
-			this.addUsedFontElement( font, el );
+			var families = styles[ "font-family" ].split( "," );
+			var found = false;
+
+			families.forEach(function( family ) {
+				family = family.trim();
+
+				var font = new Font( family, styles[ "font-weight" ], styles[ "font-style" ], this.report );
+
+				// Only web fonts will faux.
+				// TODO leaky assumption, we only use the first web font found as declared in the stack (see generatedDeclaredList note about error status)
+				if( !this.isWebFont( font ) || found ) {
+					return;
+				}
+
+				found = true;
+
+				this.usedFontSet.add( font );
+				this.addUsedFontElement( font, el );
+			}.bind( this ) );
 		}.bind( this ) );
 	};
 
 	FauxPas.prototype.generateDeclaredList = function() {
 		this.doc.fonts.forEach(function( font ) {
-			this.declaredFontSet.add( new Font( font.family, font.weight, font.style ) );
+			// We want to ignore errored font-face blocks, especially if multiple web fonts are listed in the same used font-family stack on an element.
+			if( font.status !== "error" ) {
+				this.declaredFontSet.add( new Font( font.family, font.weight, font.style ) );
+			}
 		}.bind( this ) );
 	};
 
@@ -224,73 +349,57 @@
 
 	FauxPas.prototype._addHighlights = function( elements, bgColor ) {
 		elements.forEach(function( element ) {
-			var hasTextChildren = false;
-			Array.prototype.slice.call( element.childNodes ).forEach(function( el ) {
-				if( el.nodeType === 3 ) {
-					hasTextChildren = true;
-				}
-			});
-			if( hasTextChildren ) {
-				element.style[ "background-color" ] = bgColor;
-			}
+			element.style[ "background-color" ] = bgColor;
 		});
 	};
 
-	FauxPas.prototype._consoleOutput = function( elements, str, method ) {
+	FauxPas.prototype._log = function( elements, str, method ) {
 		elements.forEach(function( element ) {
-			console[ method ]( str, element );
-		});
+			this.report[ method ]( str + " (" + this._getStyle( element, "font-family" ) + ")", element );
+		}.bind( this ) );
 	};
 
 	FauxPas.prototype.logFaux = function( elements ) {
 		if( this.highlightElements ) {
 			this._addHighlights( elements, "#eb160e" );
 		}
-		if( this.consoleOutput ) {
-			this._consoleOutput( elements, "Faux font detected:", "error" );
-		}
+
+		this._log( elements, "Faux font detected", "error" );
 	};
 
 	FauxPas.prototype.logMismatch = function( elements ) {
 		if( this.highlightElements ) {
 			this._addHighlights( elements, "#fcc" );
 		}
-		if( this.consoleOutput ) {
-			this._consoleOutput( elements, "Mismatched font detected:", "warn" );
-		}
+
+		this._log( elements, "Mismatched font detected", "warn" );
 	};
 
-	FauxPas.prototype.compare = function() {
-		var problemsFound = false;
-		this.generateDeclaredList();
-		this.generateUsedList();
-
-		if( this.consoleOutput ) {
-			console.group( projectName + " Results" );
-		}
+	FauxPas.prototype.findAllFauxWebFonts = function() {
+		this.generate();
 
 		this.usedFontSet.get().forEach(function( font ) {
 			if( this.isWebFont( font ) ) {
 				if( this.isFauxWebFont( font ) ) {
 					this.logFaux( this.usedFontsElements[ font ] );
-					problemsFound = true;
 				} else if( this.showMismatches && this.isWebFontMismatch( font ) ) {
 					this.logMismatch( this.usedFontsElements[ font ] );
-					problemsFound = true;
 				}
 			}
 		}.bind( this ) );
-
-		if( this.consoleOutput ) {
-			if( !problemsFound ) {
-				console.log( "Everything is working OK!" );
-			}
-			console.groupEnd();
-		}
-
 	};
 
-	var win = typeof window !== "undefined" ? window : this;
+	FauxPas.prototype.compare = function() {
+		this.findAllFauxWebFonts();
 
-	win.FauxPas = FauxPas;
-})();
+		if( this.consoleOutput ) {
+			this.report.printConsole();
+		}
+	};
+
+	FauxPas.prototype.getReport = function() {
+		return this.report;
+	};
+
+	return FauxPas;
+}));

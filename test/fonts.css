@@ -194,47 +194,47 @@
 }
 
 .opensans-0001 {
-	font-family: OpenSansBoldItalic;
+	font-family: OpenSansBoldItalic, sans-serif;
 }
 .opensans-0010 {
-	font-family: OpenSansItalic;
+	font-family: OpenSansItalic, sans-serif;
 }
 .opensans-0011 {
-	font-family: OpenSansItalic-BoldItalic;
+	font-family: OpenSansItalic-BoldItalic, sans-serif;
 }
 .opensans-0100 {
-	font-family: OpenSansBold;
+	font-family: OpenSansBold, sans-serif;
 }
 .opensans-0101 {
-	font-family: OpenSansBold-BoldItalic;
+	font-family: OpenSansBold-BoldItalic, sans-serif;
 }
 .opensans-0110 {
-	font-family: OpenSansBold-Italic;
+	font-family: OpenSansBold-Italic, sans-serif;
 }
 .opensans-0111 {
-	font-family: OpenSansBold-Italic-BoldItalic;
+	font-family: OpenSansBold-Italic-BoldItalic, sans-serif;
 }
 .opensans-1000 {
-	font-family: OpenSansRegular;
+	font-family: OpenSansRegular, sans-serif;
 }
 .opensans-1001 {
-	font-family: OpenSansRegular-BoldItalic;
+	font-family: OpenSansRegular-BoldItalic, sans-serif;
 }
 .opensans-1010 {
-	font-family: OpenSansRegular-Italic;
+	font-family: OpenSansRegular-Italic, sans-serif;
 }
 .opensans-1011 {
-	font-family: OpenSansRegular-Italic-BoldItalic;
+	font-family: OpenSansRegular-Italic-BoldItalic, sans-serif;
 }
 .opensans-1100 {
-	font-family: OpenSansRegular-Bold;
+	font-family: OpenSansRegular-Bold, sans-serif;
 }
 .opensans-1101 {
-	font-family: OpenSansRegular-Bold-BoldItalic;
+	font-family: OpenSansRegular-Bold-BoldItalic, sans-serif;
 }
 .opensans-1110 {
-	font-family: OpenSansRegular-Italic-Bold;
+	font-family: OpenSansRegular-Italic-Bold, sans-serif;
 }
 .opensans-1111 {
-	font-family: OpenSansRegular-Italic-Bold-BoldItalic;
+	font-family: OpenSansRegular-Italic-Bold-BoldItalic, sans-serif;
 }

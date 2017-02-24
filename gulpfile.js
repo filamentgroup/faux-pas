@@ -3,6 +3,7 @@ var gulp = require( "gulp" );
 var template = require( "gulp-template" );
 var bookmarkletify = require( "bookmarkletify" );
 
+// Insert new bookmarklet into docs file
 gulp.task( "default", function() {
 	var fauxpas = fs.readFileSync( "faux-pas.js", "utf-8" );
 	var fauxpasinit = fs.readFileSync( "faux-pas.init.js", "utf-8" );
