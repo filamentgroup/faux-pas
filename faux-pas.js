@@ -57,6 +57,11 @@
 		this.warningCount++;
 	};
 
+	// Add a warning but don’t increment the mismatch count
+	Report.prototype.silentWarn = function( message, element ) {
+		this.lines.push( new ReportLine( "warn", message, element ) );
+	};
+
 	Report.prototype.error = function( message, element ) {
 		this.lines.push( new ReportLine( "error", message, element ) );
 		this.errorCount++;
@@ -112,7 +117,7 @@
 
 		// lighter and bolder not supported
 		if( weight === "lighter" || weight === "bolder" ) {
-			this.report.warn( "lighter and bolder weights are not supported." );
+			this.report.silentWarn( "lighter and bolder weights are not supported." );
 		}
 
 		return "" + ( weightLookup[ weight ] || weight );
@@ -306,7 +311,7 @@
 		}.bind( this ) );
 
 		if( !this.usedFontSet.length() ) {
-			this.report.warn( "You didn’t actually use any web fonts here!" );
+			this.report.silentWarn( "You didn’t actually use any web fonts here!" );
 		}
 	};
 
@@ -321,7 +326,7 @@
 		}.bind( this ) );
 
 		if( !this.declaredFontSet.length() ) {
-			this.report.warn( "No web fonts were found!" );
+			this.report.silentWarn( "No web fonts were found!" );
 		}
 	};
 
