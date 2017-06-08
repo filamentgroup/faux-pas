@@ -284,6 +284,16 @@
 	FauxPas.prototype.generate = function() {
 		this.generateDeclaredList();
 		this.generateUsedList();
+
+		// Warnings
+		if( !this.declaredFontSet.length() ) {
+			this.report.silentWarn( "No web fonts were found!" );
+		} else if( !this.usedFontSet.length() ) {
+			this.report.silentWarn( "You didn’t actually use any web fonts here!" );
+		} else if( this.declaredFontSet.length() !== this.usedFontSet.length() ) {
+			// TODO report which web fonts are unused.
+			this.report.silentWarn( "There are unused @font-face blocks here, are you sure you need them all?" );
+		}
 	};
 
 	FauxPas.prototype.generateUsedList = function() {
@@ -309,10 +319,6 @@
 				this.addUsedFontElement( font, el );
 			}.bind( this ) );
 		}.bind( this ) );
-
-		if( !this.usedFontSet.length() ) {
-			this.report.silentWarn( "You didn’t actually use any web fonts here!" );
-		}
 	};
 
 	FauxPas.prototype.generateDeclaredList = function() {
@@ -324,10 +330,6 @@
 				this.declaredFontSet.add( new Font( font.family, font.weight, font.style ) );
 			}
 		}.bind( this ) );
-
-		if( !this.declaredFontSet.length() ) {
-			this.report.silentWarn( "No web fonts were found!" );
-		}
 	};
 
 	FauxPas.prototype.isWebFont = function( font ) {
