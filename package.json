@@ -1,6 +1,6 @@
 {
   "name": "fg-faux-pas",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A script to highlight elements that are mismatched to @font-face blocks which may result in shoddy faux bold or faux italic rendering.",
   "main": "faux-pas.js",
   "directories": {
@@ -23,5 +23,6 @@
     "bookmarkletify": "^1.0.0",
     "gulp": "^3.9.1",
     "gulp-template": "^4.0.0"
-  }
+  },
+  "dependencies": {}
 }
