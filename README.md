@@ -2,6 +2,8 @@
 
 A script to highlight elements that are mismatched incorrectly to @font-face blocks, which may result in shoddy faux bold or faux italic rendering. Works standalone—no dependencies.
 
+Want this on the command line? Check out [`node-faux-pas`](https://github.com/filamentgroup/node-faux-pas).
+
 ## [Demo](https://filamentgroup.github.io/faux-pas/dist/demo.html)
 
 A more [comprehensive test page](https://filamentgroup.github.io/faux-pas/test/index.html) is also available.
@@ -38,6 +40,7 @@ npm install --save-dev fg-faux-pas
 
 * Bookmarklet: Get the bookmarklet at the [demo page](https://filamentgroup.github.io/faux-pas/dist/demo.html). Drag it to your bookmarklets and use where needed. By default it highlights elements on your page but check the console for more output.
 * Recommended: Include in your pattern library build. Include both `faux-pas.js` and `faux-pas.init.js` (tip: use your own init file to change configuration options).
+* Also on the command line: [`node-faux-pas`](https://github.com/filamentgroup/node-faux-pas)
 
 ## Options
 
