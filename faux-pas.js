@@ -28,8 +28,19 @@
 	};
 
 	ReportLine.prototype.printElement = function() {
-		// return "<" + this.element.tagName + " class=\"" + this.element.className + "\">";
-		return this.element ? this.element.outerHTML.replace(/ style\=\"[^\"]*\"/, "") : "";
+		if( !this.element ) {
+			return "";
+		}
+
+		// get only HTML for parent element, not children
+		var node = this.element.cloneNode(true);
+		var children = node.childNodes;
+		// remove backwards, keep in mind that the length changes when you remove a node
+		for( var j = children.length - 1; j >= 0; j-- ) {
+			node.removeChild( children[ j ] );
+		}
+
+		return node.outerHTML.replace(/ style\=\"[^\"]*\"/, "");
 	};
 
 	ReportLine.prototype.toString = function() {
