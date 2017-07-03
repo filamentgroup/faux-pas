@@ -38,7 +38,7 @@
 	};
 	ReportLine.prototype.console = function() {
 		if (this.element) {
-			console[this.level](this.message, this.element);
+			console[this.level](this.message, this.element); 
 		} else {
 			console[this.level](this.message);
 		}
@@ -246,8 +246,11 @@
 	 * FauxPas, highlights elements that are font-synthesized
 	 */
 
-	var FauxPas = function(win, options) {
-		if (!("fonts" in win.document)) {
+	var FauxPas = function(root, options) {
+		this.win = this.getWindowObject( root );
+		this.doc = this.win.document;
+
+		if (!("fonts" in this.win.document)) {
 			throw Error(
 				projectName + " requires the CSS Font Loading API, which your browser does not support."
 			);
@@ -261,12 +264,19 @@
 
 		this.report = new Report();
 
-		this.win = win;
-		this.doc = win.document;
-
 		this.usedFontsElements = {};
 		this.usedFontSet = new FontSet();
 		this.declaredFontSet = new FontSet();
+	};
+
+	FauxPas.prototype.getWindowObject = function(root) {
+		if( "defaultView" in root ) {
+			return root.defaultView;
+		} else if( "ownerDocument" in root && root.ownerDocument ) {
+			return root.ownerDocument.defaultView;
+		} else if( root instanceof Window ) {
+			return root;
+		}
 	};
 
 	FauxPas.prototype.addUsedFontElement = function(font, element) {
