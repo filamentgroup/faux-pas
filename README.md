@@ -1,3 +1,5 @@
+:warning: This project is archived and the repository is no longer maintained.
+
 # faux pas, a faux web font detector
 
 A script to highlight elements that are mismatched incorrectly to @font-face blocks, which may result in shoddy faux bold or faux italic rendering. Works standalone—no dependencies.
